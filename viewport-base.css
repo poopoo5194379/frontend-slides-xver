@@ -1,0 +1,166 @@
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Slides are authored at 1920×1080 and scaled as a whole.
+   DO NOT use scroll-snap — navigation is JS-driven.
+   McKINSEY EDITION: adds bottom-line, findings, implication styles.
+   =========================================== */
+
+html, body {
+    width: 100%; height: 100%; margin: 0; overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+.deck-viewport {
+    position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000);
+}
+
+.deck-stage {
+    position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+    overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff);
+}
+
+.slide {
+    position: absolute; inset: 0; width: 1920px; height: 1080px;
+    overflow: hidden; display: block; visibility: hidden; opacity: 0;
+    pointer-events: none; background: var(--slide-bg, #fff);
+}
+
+.slide.active, .slide.visible {
+    visibility: visible; opacity: 1; pointer-events: auto; z-index: 1;
+}
+
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+
+.deck-controls {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 1000;
+}
+
+.page-indicator {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 1000;
+    background: rgba(15, 23, 42, 0.75); color: #fff; padding: 8px 20px;
+    border-radius: 50px; font-size: 14px; backdrop-filter: blur(10px); pointer-events: none;
+}
+
+/* McKINSEY-STYLE COMPONENTS */
+
+.bottom-line {
+    font-family: var(--font-heading, 'Inter', 'Noto Sans SC', sans-serif);
+    font-size: 32px; font-weight: 700; color: var(--accent, #2c7a4d);
+    line-height: 1.35; margin-bottom: 4px; flex-shrink: 0;
+    display: flex; align-items: flex-start; gap: 14px;
+}
+.bottom-line::before {
+    content: ''; display: inline-block; width: 5px; height: 30px;
+    background: var(--accent, #2c7a4d); margin-top: 5px; border-radius: 3px; flex-shrink: 0;
+}
+
+.slide-subtitle {
+    font-size: 16px; color: var(--text-muted, #475569); font-weight: 500;
+    margin-bottom: 6px; flex-shrink: 0; letter-spacing: 0.02em; padding-left: 19px;
+}
+
+.slide-divider {
+    width: 60px; height: 4px; background: var(--accent, #2c7a4d);
+    margin-bottom: 18px; border-radius: 2px; flex-shrink: 0;
+}
+
+.findings-bar { display: flex; gap: 16px; margin-top: 14px; flex-shrink: 0; }
+
+.finding-item {
+    flex: 1; background: var(--bg-card, #fff); border-radius: 12px;
+    padding: 14px 16px; border: 1px solid var(--border-light, #edf2f7);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column;
+}
+
+.finding-item .finding-icon { font-size: 16px; color: var(--accent, #2c7a4d); margin-bottom: 4px; }
+.finding-item .finding-data {
+    font-family: var(--font-heading, 'Inter', 'Noto Sans SC', sans-serif);
+    font-size: 24px; font-weight: 800; color: var(--text-heading, #0f172a);
+    line-height: 1.2; margin-bottom: 2px;
+}
+.finding-item .finding-text { font-size: 15px; color: var(--text-muted, #475569); line-height: 1.55; }
+
+.findings-panel {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 12px; min-height: 0; overflow: hidden;
+}
+.findings-panel .finding-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-light, #edf2f7);
+}
+.findings-panel .finding-row:last-child { border-bottom: none; }
+.findings-panel .finding-marker {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent-bg, #e9f5ef); color: var(--accent, #2c7a4d);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; flex-shrink: 0;
+}
+.findings-panel .finding-content h5 {
+    font-size: 17px; font-weight: 700; color: var(--text-heading, #0f172a); margin-bottom: 3px;
+}
+.findings-panel .finding-content p {
+    font-size: 15px; color: var(--text-muted, #475569); line-height: 1.55;
+}
+
+.implication-box {
+    background: linear-gradient(135deg, var(--accent-bg, #e9f5ef) 0%, var(--bg-card, #fff) 100%);
+    border: 1px solid var(--accent, #2c7a4d); border-left: 4px solid var(--accent, #2c7a4d);
+    border-radius: 10px; padding: 14px 20px; font-size: 16px;
+    color: var(--text-body, #1e293b); flex-shrink: 0; line-height: 1.55;
+}
+.implication-box strong { color: var(--accent, #2c7a4d); }
+
+.chart-finding {
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid var(--border-light, #edf2f7);
+    font-size: 14px; color: var(--text-muted, #475569); line-height: 1.55; flex-shrink: 0;
+}
+.chart-finding strong { color: var(--accent, #2c7a4d); font-weight: 700; }
+
+.data-tag {
+    display: inline-block; background: var(--accent-bg, #e9f5ef);
+    color: var(--accent, #2c7a4d); font-weight: 700;
+    padding: 2px 10px; border-radius: 4px; font-size: 14px;
+}
+.data-tag-up { color: #16a34a; background: #f0fdf4; }
+.data-tag-down { color: #dc2626; background: #fef2f2; }
+
+.chart-wrapper.pie-center { display: flex; align-items: center; justify-content: center; }
+
+/* EDITABLE RUNTIME CHROME */
+.slide-edit-layer { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+body.deck-edit-mode .slide-edit-layer { pointer-events: none; }
+
+.slide-object {
+    position: absolute; box-sizing: border-box; pointer-events: auto;
+    outline: 1px dashed transparent; border-radius: 4px;
+}
+body.deck-edit-mode .slide-object {
+    outline-color: color-mix(in srgb, var(--deck-chrome-muted, #94a3b8) 40%, transparent);
+}
+.slide-object.is-selected {
+    outline: 2px solid var(--deck-chrome-accent, #22d3ee);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--deck-chrome-accent, #22d3ee) 25%, transparent);
+}
+
+/* PRINT */
+@media print {
+    html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+    .deck-viewport { position: static; overflow: visible; background: #fff; }
+    .deck-stage { position: static; width: auto; height: auto; transform: none !important; background: none; }
+    .slide {
+        position: relative; display: block !important; visibility: visible !important;
+        opacity: 1 !important; pointer-events: auto !important;
+        width: 1920px; height: 1080px; break-after: page; page-break-after: always;
+    }
+    .slide:last-child { break-after: auto; page-break-after: auto; }
+    .deck-controls, .page-indicator, .deck-left-hover-anchor,
+    .slide-sidebar, .rte-toolbar, .deck-add-element-menu { display: none !important; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important; transition-duration: 0.2s !important;
+    }
+}
